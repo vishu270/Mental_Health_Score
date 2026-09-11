@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A dashboard for estimating a mental health score from daily habits."
+    />
+    <title>Mental Health Score | Insight Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="page-header">
+        <div class="brand" aria-label="Mental Health Score Predictor branding">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M16 4.5a11.5 11.5 0 1 0 11.5 11.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+              <path d="M21 4.5h6.5V11" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M10.5 17.1 14 20.6l7.7-8" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div class="brand-copy">
+            <p class="eyebrow">AI-powered insights for a healthier, happier you</p>
+            <h1>Mental Health Score Predictor</h1>
+          </div>
+        </div>
+
+        <div class="header-meta" aria-label="Dashboard status information">
+          <span class="meta-pill meta-pill--soft">ML POWERED</span>
+          <span class="meta-pill meta-pill--status"><span class="status-dot" aria-hidden="true"></span>API CONNECTED</span>
+        </div>
+      </header>
+
+      <div class="dashboard-layout">
+        <section class="form-panel" aria-labelledby="profile-heading">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Student Information</p>
+              <h2 id="profile-heading">Student Information</h2>
+            </div>
+            <span class="required-note"><span aria-hidden="true">*</span> All fields are required</span>
+          </div>
+
+          <p class="panel-subtitle">Fill in your details to predict your mental health score</p>
+
+          <form id="prediction-form" novalidate>
+            <div class="input-grid">
+              <div class="field-card numeric-card">
+                <div class="field-heading">
+                  <label for="age">Age</label>
+                  <span class="field-unit">years</span>
+                </div>
+                <div class="stepper" data-stepper>
+                  <button class="stepper-button" type="button" data-direction="-1" aria-label="Decrease age">−</button>
+                  <input id="age" name="Age" type="number" value="21" min="1" max="100" step="1" data-precision="0" required inputmode="numeric" />
+                  <button class="stepper-button" type="button" data-direction="1" aria-label="Increase age">+</button>
+                </div>
+                <p class="field-help">Enter an age from 1 to 100 years.</p>
+              </div>
+
+              <div class="field-card">
+                <div class="field-heading">
+                  <label for="gender">Gender</label>
+                  <span class="field-unit">profile</span>
+                </div>
+                <select id="gender" name="Gender" required>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+                <p class="field-help">Select the option that best represents you.</p>
+              </div>
+
+              <div class="field-card">
+                <div class="field-heading">
+                  <label for="country">Country</label>
+                  <span class="field-unit">location</span>
+                </div>
+                <select id="country" name="Country" required>
+                  <option value="India">India</option>
+                  <option value="USA">USA</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Australia">Australia</option>
+                  <option value="UK">UK</option>
+                  <option value="Germany">Germany</option>
+                  <option value="Mexico">Mexico</option>
+                  <option value="Turkey">Turkey</option>
+                  <option value="France">France</option>
+                  <option value="Other">Other</option>
+                </select>
+                <p class="field-help">Choose your current country or region.</p>
+              </div>
+
+              <div class="field-card">
+                <div class="field-heading">
+                  <label for="academic-level">Academic Level</label>
+                  <span class="field-unit">education</span>
+                </div>
+                <select id="academic-level" name="Academic_Level" required>
+                  <option value="Undergraduate">Undergraduate</option>
+                  <option value="Graduate">Graduate</option>
+                  <option value="High School">High School</option>
+                </select>
+                <p class="field-help">Choose your present education level.</p>
+              </div>
+
+              <div class="field-card">
+                <div class="field-heading">
+                  <label for="platform">Most Used Platform</label>
+                  <span class="field-unit">social</span>
+                </div>
+                <select id="platform" name="Most_Used_Platform" required>
+                  <option value="Instagram">Instagram</option>
+                  <option value="Facebook">Facebook</option>
+                  <option value="LinkedIn">LinkedIn</option>
+                  <option value="Snapchat">Snapchat</option>
+                  <option value="Twitter">Twitter</option>
+                  <option value="YouTube">YouTube</option>
+                  <option value="TikTok">TikTok</option>
+                  <option value="LINE">LINE</option>
+                  <option value="KakaoTalk">KakaoTalk</option>
+                  <option value="VKontakte">VKontakte</option>
+                  <option value="WhatsApp">WhatsApp</option>
+                  <option value="WeChat">WeChat</option>
+                </select>
+                <p class="field-help">The platform you use most often.</p>
+              </div>
+
+              <div class="field-card">
+                <div class="field-heading">
+                  <label for="purpose">Purpose Of Use</label>
+                  <span class="field-unit">intent</span>
+                </div>
+                <select id="purpose" name="Purpose_Of_Use" required>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Networking">Networking</option>
+                  <option value="Education">Education</option>
+                  <option value="News">News</option>
+                </select>
+                <p class="field-help">Your most common reason for using it.</p>
+              </div>
+
+              <div class="field-card numeric-card">
+                <div class="field-heading">
+                  <label for="usage-hours">Average Daily Usage Hours</label>
+                  <span class="field-unit">hours</span>
+                </div>
+                <div class="stepper" data-stepper>
+                  <button class="stepper-button" type="button" data-direction="-1" aria-label="Decrease average daily usage hours">−</button>
+                  <input id="usage-hours" name="Avg_Daily_Usage_Hours" type="number" value="7.0" min="0.1" max="24" step="0.1" data-precision="1" required inputmode="decimal" />
+                  <button class="stepper-button" type="button" data-direction="1" aria-label="Increase average daily usage hours">+</button>
+                </div>
+                <p class="field-help">Enter a positive value up to 24 hours.</p>
+              </div>
+
+              <div class="field-card numeric-card">
+                <div class="field-heading">
+                  <label for="daily-unlocks">Daily Unlocks</label>
+                  <span class="field-unit">times</span>
+                </div>
+                <div class="stepper" data-stepper>
+                  <button class="stepper-button" type="button" data-direction="-1" aria-label="Decrease daily unlocks">−</button>
+                  <input id="daily-unlocks" name="Daily_Unlocks" type="number" value="120" min="1" step="1" data-precision="0" required inputmode="numeric" />
+                  <button class="stepper-button" type="button" data-direction="1" aria-label="Increase daily unlocks">+</button>
+                </div>
+                <p class="field-help">How many times you unlock your phone each day.</p>
+              </div>
+
+              <div class="field-card numeric-card">
+                <div class="field-heading">
+                  <label for="study-hours">Study Hours</label>
+                  <span class="field-unit">hours</span>
+                </div>
+                <div class="stepper" data-stepper>
+                  <button class="stepper-button" type="button" data-direction="-1" aria-label="Decrease study hours">−</button>
+                  <input id="study-hours" name="Study_Hours" type="number" value="3.0" min="0.1" max="24" step="0.1" data-precision="1" required inputmode="decimal" />
+                  <button class="stepper-button" type="button" data-direction="1" aria-label="Increase study hours">+</button>
+                </div>
+                <p class="field-help">Enter between 0.1 and 24 hours per day.</p>
+              </div>
+
+              <div class="field-card numeric-card">
+                <div class="field-heading">
+                  <label for="activity-hours">Physical Activity Hours</label>
+                  <span class="field-unit">hours</span>
+                </div>
+                <div class="stepper" data-stepper>
+                  <button class="stepper-button" type="button" data-direction="-1" aria-label="Decrease physical activity hours">−</button>
+                  <input id="activity-hours" name="Physical_Activity_Hours" type="number" value="1.0" min="0.1" max="24" step="0.1" data-precision="1" required inputmode="decimal" />
+                  <button class="stepper-button" type="button" data-direction="1" aria-label="Increase physical activity hours">+</button>
+                </div>
+                <p class="field-help">Enter between 0.1 and 24 hours per day.</p>
+              </div>
+
+              <div class="field-card numeric-card">
+                <div class="field-heading">
+                  <label for="sleep-hours">Sleep Hours Per Night</label>
+                  <span class="field-unit">hours</span>
+                </div>
+                <div class="stepper" data-stepper>
+                  <button class="stepper-button" type="button" data-direction="-1" aria-label="Decrease sleep hours per night">−</button>
+                  <input id="sleep-hours" name="Sleep_Hours_Per_Night" type="number" value="7.5" min="0.1" max="24" step="0.1" data-precision="1" required inputmode="decimal" />
+                  <button class="stepper-button" type="button" data-direction="1" aria-label="Increase sleep hours per night">+</button>
+                </div>
+                <p class="field-help">Enter between 0.1 and 24 hours per night.</p>
+              </div>
+
+              <div class="field-card">
+                <div class="field-heading">
+                  <label for="stress-level">Stress Level</label>
+                  <span class="field-unit">wellbeing</span>
+                </div>
+                <select id="stress-level" name="Stress_Level" required>
+                  <option value="Low">Low</option>
+                  <option value="Medium" selected>Medium</option>
+                  <option value="High">High</option>
+                  <option value="Very High">Very High</option>
+                </select>
+                <p class="field-help">Choose the level that best reflects your day.</p>
+              </div>
+            </div>
+
+            <p id="form-error" class="form-error" role="alert" hidden></p>
+
+            <div class="action-row">
+              <button id="predict-button" class="predict-button" type="submit">
+                <span class="button-label">Predict Mental Health Score</span>
+                <span class="button-loader" aria-hidden="true"></span>
+                <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
+                  <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+
+              <button class="secondary-button" type="reset">Reset</button>
+            </div>
+          </form>
+        </section>
+
+        <aside class="result-card" id="result-card" aria-live="polite">
+          <div class="result-header">
+            <div>
+              <p class="eyebrow">Your Mental Health Score</p>
+              <h2>Here's your predicted score based on the information you provided.</h2>
+            </div>
+            <span class="live-pill">Live Prediction</span>
+          </div>
+
+          <div class="result-score" aria-live="polite">
+            <div class="predicted-score" id="predicted-score">—</div>
+          </div>
+
+          <div class="gauge-shell">
+            <div class="gauge-container" aria-label="Mental health score gauge from 3.6 to 9.4">
+              <svg class="score-gauge" viewBox="0 0 360 210" role="img" aria-labelledby="gaugeTitle gaugeDescription">
+                <defs>
+                  <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#EF4444" />
+                    <stop offset="43%" stop-color="#F59E0B" />
+                    <stop offset="100%" stop-color="#22C55E" />
+                  </linearGradient>
+                </defs>
+                <title id="gaugeTitle">Mental health score gauge</title>
+                <desc id="gaugeDescription">The gauge reflects the live mental health score returned by the API.</desc>
+                <path class="gauge-track" d="M 40 165 A 140 140 0 0 1 320 165" pathLength="100" />
+                <path id="gauge-progress" class="gauge-progress" d="M 40 165 A 140 140 0 0 1 320 165" pathLength="100" />
+                <g id="gauge-needle-group" aria-hidden="true">
+                  <line id="gauge-needle" x1="180" y1="165" x2="180" y2="92" stroke="#0F172A" stroke-width="4" stroke-linecap="round" />
+                  <circle cx="180" cy="165" r="6" fill="#0F172A" />
+                </g>
+              </svg>
+            </div>
+
+            <div class="gauge-scale" aria-label="mental health score scale">
+              <div class="scale-item">
+                <strong>3.6</strong>
+                <span>Low</span>
+              </div>
+              <div class="scale-item">
+                <strong>5</strong>
+                <span>Medium</span>
+              </div>
+              <div class="scale-item">
+                <strong>7</strong>
+                <span>High</span>
+              </div>
+              <div class="scale-item">
+                <strong>9.4</strong>
+                <span>Excellent</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="score-status score-status--neutral" id="score-status"><span>Awaiting</span><small>Prediction</small></div>
+
+          <div class="predicted-block">
+            <p class="score-caption">Predicted score</p>
+            <div class="predicted-score-row">
+              <div class="predicted-score-value" id="predicted-score-value">—</div>
+            </div>
+          </div>
+
+          <div class="summary-grid">
+            <div class="summary-box">
+              <div class="summary-box__label">
+                <span class="mini-icon" aria-hidden="true">◔</span>
+                <span>Predicted score</span>
+              </div>
+              <div class="summary-box__value" id="score-value">—</div>
+            </div>
+            <div class="summary-box">
+              <div class="summary-box__label">
+                <span class="mini-icon" aria-hidden="true">▤</span>
+                <span>Score range</span>
+              </div>
+              <div class="summary-box__value">3.6 – 9.4</div>
+            </div>
+            <div class="summary-box summary-box--status">
+              <div class="summary-box__label">
+                <span class="mini-icon" aria-hidden="true">◉</span>
+                <span>Model status</span>
+              </div>
+              <div class="summary-box__value summary-box__value--status">
+                <span class="status-dot green" aria-hidden="true"></span>
+                Active
+              </div>
+            </div>
+          </div>
+
+          <p class="score-disclaimer">Model-generated score — not a medical diagnosis.</p>
+
+          <div class="insights-panel">
+            <div class="tips-header">
+              <div class="tips-header__icon" aria-hidden="true">✦</div>
+              <span>Tips for a Healthier You</span>
+            </div>
+
+            <div class="tips-grid">
+              <div class="tip-card">
+                <div class="tip-icon">🌙</div>
+                <h3>Improve Sleep</h3>
+                <p>Aim for 7–9 hours nightly</p>
+              </div>
+              <div class="tip-card">
+                <div class="tip-icon">🏃</div>
+                <h3>Stay Active</h3>
+                <p>At least 30 minutes daily</p>
+              </div>
+              <div class="tip-card">
+                <div class="tip-icon">🧠</div>
+                <h3>Mindful Usage</h3>
+                <p>Take regular breaks</p>
+              </div>
+              <div class="tip-card">
+                <div class="tip-icon">🫶</div>
+                <h3>Manage Stress</h3>
+                <p>Practice relaxation</p>
+              </div>
+            </div>
+          </div>
+
+          <blockquote class="quote-block">“A healthier mind leads to a brighter tomorrow.”</blockquote>
+        </aside>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
